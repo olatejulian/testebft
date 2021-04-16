@@ -13,6 +13,7 @@
 
 */
 
+session_start();
 ?>
 <!DOCTYPE html>
 
@@ -29,6 +30,17 @@
 
         <div>
             <h1 name='title'>CADASTRO</h1>
+        </div>
+
+        <div>
+            <?php
+                # Será responsável em se comunicar com o usuário sobre a situação do seu cadastro
+                # Este if basicamente mostra alguma mensagem ao usuário e depois a exclui para deixar $_SESSION['msg']
+                if(isset($_SESSION['msg'])): #ver <https://www.php.net/manual/en/function.isset.php>
+                    echo $_SESSION['msg'];
+                    unset($_SESSION['msg']); #ver <https://www.php.net/manual/en/function.unset>
+                endif;
+            ?>
         </div>
 
         <form method='POST', action="action.php"> 
