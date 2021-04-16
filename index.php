@@ -1,7 +1,7 @@
 <!--Página index do site teste-->
 <?php
 /* TODO: Realizar comunicação com banco de dados postgresql utilizando método POST 
-        [ ] Criar um formulário na página inicial;
+        [x] Criar um formulário na página inicial;
         [ ] Conexão com banco de dados;
         [ ] input de dados usando POST no DB
         [ ] validação dos dados através de leitura no DB
@@ -31,7 +31,7 @@
             <h1 name='title'>CADASTRO</h1>
         </div>
 
-        <form method='POST', action=""> 
+        <form method='POST', action="action.php"> 
 
             <div>
                 <label>Email</label>
