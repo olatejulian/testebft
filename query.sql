@@ -7,3 +7,6 @@ CREATE TABLE usuarios (
 );
 
 INSERT INTO usuarios (email, senha) VALUES ('teste@mail.com', 'abc123');
+
+ALTER TABLE usuarios 
+    DROP CONSTRAINT usuarios_senha_key;

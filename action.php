@@ -2,7 +2,7 @@
     /*
     - Não consegui implementar uma função de erro do tipo $pg_result_erro() ou similar, ver <https://www.php.net/manual/en/function.pg-result-error>
     - FIXME: EU ESCREVI UNIQUE NA SENHA!!!! ('-.-) (vou arrumar no python) FIXED!
-    
+    - Sobre a unicidade do email, eu decidi utilizar uma constraint UNIQUE na coluna email na tabela usuarios no DB, assim o DB aceita somente um email cadastrado, mas no php eu estabeleci uma verificação de email já cadastrado e uma validação se o email realmente foi cadastrado.    
     */ 
 
     session_start(); # ver <https://www.php.net/manual/en/function.session-start.php>
@@ -21,17 +21,29 @@
         $conn_string = "host=localhost port=5432 dbname=dbbft user=postgres password=1234";
         $connection = pg_connect($conn_string); # se a conexão falhar me retorna false, interessante para msg de erro, ver <https://www.php.net/manual/en/function.pg-connect>
         if($connection == false):
-        $_SESSION['msg'] = "Falha ao se conectar ao servidor."; # ver sobre $_SESSION <https://www.php.net/manual/en/reserved.variables.session.php>
-        endif;
-    
-        $user_insert = "INSERT INTO usuarios (email, senha) VALUES ('$email', '$password');";
-        $query_insert = pg_query($connection, $user_insert);
-        if(!$query_insert):
-            $_SESSION['msg'] = "Erro em cadastrar";
+            $_SESSION['msg'] = "Falha ao se conectar ao servidor."; # ver sobre $_SESSION <https://www.php.net/manual/en/reserved.variables.session.php>
         endif;
 
-        
-
+        #Verificando se o email já existe no DB
+        $user_select = "SELECT email FROM usuarios WHERE email='$email';";
+        $query_select = pg_query($connection, $user_select);
+        $user_validation = pg_fetch_row($query_select);
+        if($user_validation[0] === $email): # XXX: apareceu um erro no log do apache "Trying to access array offset on value of type bool in /home/olatejulian/testebft/action.php on line 31, referer: http://localhost/index.php" quando utilizei ==, para === nenhuma msg apareceu.
+            $_SESSION['msg'] = "Email já cadastrado!";
+        else:
+            #Input de dados no DB
+            $user_insert = "INSERT INTO usuarios (email, senha) VALUES ('$email', '$password');";
+            $query_insert = pg_query($connection, $user_insert);
+            if(!$query_insert):
+                $_SESSION['msg'] = "Erro ao cadastrar!";
+            else:
+                #Validação do cadastro 
+                $cadastro_select = "SELECT email FROM usuarios WHERE email='$email';";
+                $cadastro_query_select = pg_query($connection, $cadastro_select);
+                $cadastro_validation = pg_fetch_row($cadastro_query_select); #ver <https://www.php.net/manual/en/function.pg-fetch-row>
+                pg_close($connection); # fecha conexão com o banco de dados, ver <https://www.php.net/manual/en/function.pg-close.php>
+            endif;
+        endif;
     endif;
 
 ?>
@@ -58,7 +70,8 @@
                 if(isset($_SESSION['msg'])):
                     header("Location: index.php"); # envia-me para um página determinada, ver <https://www.php.net/manual/en/function.header>
                 else:
-                    echo "Email: $email, Senha: $password"; #OK
+                    #echo "Email: $email, Senha: $password"; #OK
+                    echo "Seu Email $cadastro_validation[0] foi cadastrado com sucesso!";
                 endif;
             ?>
         </div>
