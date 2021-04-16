@@ -9,21 +9,23 @@
 - Como geralmente só utilizo SQL para banco de dados para análise, geralmente utilizando Python, conectando com PSYCOPG2 e fazendo query select com PANDAS, eu não sei lidar com senhas, vi que no php é possível utilizar criptografia para senhas e que POST é um método confiável de insert de dados em DB, preciso estudar mais a documentação do php e postgresql posteriormente.
 
 
+## Sobre o servidor Postgresql
 
 
-## About PostgreSQL Server
+
+## Sobre o servidor Apache
 
 
 ## System Information
 
 ### Versions
-
+Linus Kernel 5.4 LTS (Manjaro OS)
+Apache v2.4.46
 Postgresql v13.1
-Python v3.8.5
 PHP v8.0.3
-Zend Engine v4.0.3
+Python v3.8.5
 
-### OS and Hardware
+### OS, Kernel and Hardware
 
 Operating System: Manjaro Linux
 KDE Plasma Version: 5.21.3
