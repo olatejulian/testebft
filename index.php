@@ -2,8 +2,8 @@
 <?php
 /* TODO: Realizar comunicação com banco de dados postgresql utilizando método POST 
         [x] Criar um formulário na página inicial;
-        [ ] Conexão com banco de dados;
-        [ ] input de dados usando POST no DB
+        [x] Conexão com banco de dados;
+        [x] input de dados usando POST no DB
         [ ] validação dos dados através de leitura no DB
 
 */
@@ -47,12 +47,12 @@ session_start();
 
             <div>
                 <label>Email</label>
-                <input type='email' name='email'>
+                <input type='email' name='email' required>
             </div>    
 
             <div>
                 <label>Senha</label>
-                <input type='password' name='password'>
+                <input type='password' name='password' required>
             </div>
        
             <div>

@@ -1,25 +1,38 @@
 <?php
     /*
     - Não consegui implementar uma função de erro do tipo $pg_result_erro() ou similar, ver <https://www.php.net/manual/en/function.pg-result-error>
-    
+    - FIXME: EU ESCREVI UNIQUE NA SENHA!!!! ('-.-) (vou arrumar no python) FIXED!
     
     */ 
 
     session_start(); # ver <https://www.php.net/manual/en/function.session-start.php>
-    unset($_SESSION['msg']); #limpa a variável 
+    unset($_SESSION['msg']); #limpa a variável
+
     # var
     # Sobre POST <https://www.php.net/manual/en/reserved.variables.post.php>
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $password = md5($password); # criptografia de senhas, ver <https://www.php.net/manual/en/function.md5.php>
+    $button_submit = $_POST['button_submit'];
+    if(isset($button_submit)):
+        
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password = md5($password); # criptografia de senhas, ver <https://www.php.net/manual/en/function.md5.php>
 
-    #Conexão com o banco de dados postgresql
-    $conn_string = "host=localhost port=5432 dbname=dbbft user=postgres password=1234";
-    $connection = pg_connect($conn_string); # se a conexão falhar me retorna false, interessante para msg de erro, ver <https://www.php.net/manual/en/function.pg-connect>
-    if($connection == false):
-    $_SESSION['msg'] = "Falha ao se conectar ao servidor."; # ver sobre $_SESSION <https://www.php.net/manual/en/reserved.variables.session.php>
+        #Conexão com o banco de dados postgresql
+        $conn_string = "host=localhost port=5432 dbname=dbbft user=postgres password=1234";
+        $connection = pg_connect($conn_string); # se a conexão falhar me retorna false, interessante para msg de erro, ver <https://www.php.net/manual/en/function.pg-connect>
+        if($connection == false):
+        $_SESSION['msg'] = "Falha ao se conectar ao servidor."; # ver sobre $_SESSION <https://www.php.net/manual/en/reserved.variables.session.php>
+        endif;
+    
+        $user_insert = "INSERT INTO usuarios (email, senha) VALUES ('$email', '$password');";
+        $query_insert = pg_query($connection, $user_insert);
+        if(!$query_insert):
+            $_SESSION['msg'] = "Erro em cadastrar";
+        endif;
+
+        
+
     endif;
-
 
 ?>
 
