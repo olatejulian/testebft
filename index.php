@@ -1,16 +1,21 @@
 <!--Página index do site teste-->
 <?php
-/* TODO: Realizar comunicação com banco de dados postgresql utilizando método POST 
+/* TODO: Realizar comunicação com banco de dados postgresql utilizando método POST;
         [x] Criar um formulário na página inicial;
         [x] Conexão com banco de dados;
-        [x] input de dados usando POST no DB
-        [ ] validação dos dados através de leitura no DB
+        [x] input de dados usando POST no DB;
+                [x] verificar se o email já existe antes;
+        [x] validação dos dados através de leitura no DB.
 
 */
-/* Estrutura do site 
+/*
+Estrutura do site 
     - página inicial index.php
-    - uma página para mostrar que o cadastro foi realizado com sucesso ou que não foi possível cadastrar por algum motivo
+    - uma página para mostrar que o cadastro foi realizado com sucesso ou que não foi possível cadastrar por algum motivo => action.php
 
+Sobre a funcionalidade do cadastro, os inputs estão configurados em suas tags html como required, logo necessariamente não há como inserir dados nulos, as colunas email e senha na tabela usuarios no DB também estão configuradas como "não nulas", logo não é possível inserir uma linha nula no DB.
+
+A tag do input do email está configurada como tipo "email", ou seja, ela só aceita strings de estrutura "name@email"
 */
 
 session_start();
