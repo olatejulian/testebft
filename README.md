@@ -1,7 +1,6 @@
 # Repositório do teste de backend dev da Brasilfone Telecom - BFT
 
-[Julian Lucas F. Olate](github.com/olatejulian/testebft)
-
+Julian Lucas F. Olate
 ## Comentários
 
 ### Considerações iniciais
