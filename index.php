@@ -1,4 +1,4 @@
-<!--Página index do site teste-->
+<!--Página inicial do site teste-->
 <?php
 /* TODO: Realizar comunicação com banco de dados postgresql utilizando método POST;
         [x] Criar um formulário na página inicial;
@@ -20,6 +20,7 @@ A tag do input do email está configurada como tipo "email", ou seja, ela só ac
 
 session_start();
 ?>
+
 <!DOCTYPE html>
 
 <html lang='pt-br'>

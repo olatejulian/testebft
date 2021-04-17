@@ -1,4 +1,5 @@
-<?php
+<!-- Página auxiliar para cadastro -->
+<?iphp
     /*
     - Não consegui implementar uma função de erro do tipo $pg_result_erro() ou similar, ver <https://www.php.net/manual/en/function.pg-result-error>
     
@@ -50,6 +51,7 @@
                 else:
                     $_SESSION['msg'] = "Houve um problema com o seu cadastro! Caso seu problema persista procure atendimento em: (00)0000-0000";
                     pg_close($connection);
+                endif;
             endif;
         endif;
     endif;
@@ -78,7 +80,6 @@
                 if(isset($_SESSION['msg'])):
                     header("Location: index.php"); # envia-me para um página determinada, ver <https://www.php.net/manual/en/function.header>
                 else:
-                    #echo "Email: $email, Senha: $password"; #OK
                     echo "Seu Email $cadastro_validation[0] foi cadastrado com sucesso!";
                 endif;
             ?>
